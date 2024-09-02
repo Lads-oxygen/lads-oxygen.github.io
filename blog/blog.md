@@ -1,4 +1,4 @@
-@def title = "Index"
+@def title = "Blog"
 
 @@navbar
 
@@ -12,6 +12,6 @@ Ladislas Walewski
 
 @@
 
-## 
+## Posts
 
-Hello! On this website you will find various notes on Machine Learning and Mathematics.
+[A Comparison of Large Language Model (LLM) Evaluation Services](../LLM_Evaluation/LLM_Evaluation)
