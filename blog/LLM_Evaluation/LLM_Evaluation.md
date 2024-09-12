@@ -134,7 +134,7 @@ Code generation is one of the most useful applications of LLMs. So naturally, ev
 
 ## References
 
-[^1]: [LLM-as-a-Judge](https://example.com/llm-as-a-judge)
+[^1]: [LLM-as-a-Judge](https://arxiv.org/abs/2306.05685)
 
 [^2]: [Latency](https://www.taivo.ai/__llm-latency-is-linear-in-output-token-count/)
 
