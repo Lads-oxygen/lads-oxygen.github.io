@@ -19,9 +19,9 @@
   --accent-color: #ece9e9;
   --background-color: #fbfefb;
   --hover-background-color: #f0f0f0;
-  --table-header-background: #e1dce2;
-  --table-even-row-background: #f1f3f4b9;
-  --table-odd-row-background: #f8f6f8b6;
+  --table-header-background: #e2e2dc;
+  --table-even-row-background: #f4f4f1b9;
+  --table-odd-row-background: #f8f8f6b6;
   --table-border-color: #ddd;
   --table-caption-color: #666;
 }
@@ -125,7 +125,7 @@ body {
 }
 
 /* On wide screens, fix content width to a max value. */
-@media (min-width: 480px) {
+@media (min-width: 680px) {
   .franklin-content {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -365,9 +365,8 @@ code {
   display: inline-block;
   cursor: pointer;
   font-size: 18px;
-  padding: 14px 0 14px 16px;
+  margin: 14px 0 14px 4px;
   color: var(--text-color);
-  margin-left: auto;
 }
 
 .dark-mode-toggle input {
@@ -410,7 +409,8 @@ code {
   display: block;
   color: var(--text-color);
   text-align: center;
-  padding: 14px 16px;
+  padding: 14px 14px;
+  margin: 0 4px;
   text-decoration: none;
   border-radius: 8px;
   transition: background-color 0.3s;

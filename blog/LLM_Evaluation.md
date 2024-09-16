@@ -29,7 +29,7 @@ As the deployment of LLMs has become more widespread, so has the need for rigoro
 
 In practice, we make use of:
 
-- unit test cases - individual tests that examine how well a language model handles specific tasks e.g. assessing whether an LLM can generate a correct answer to a specific factual question.
+- unit test cases - individual tests that examine how well a language model handles specific tasks e.g. assessing whether an LLM can generate a corresct answer to a specific factual question.
 - evaluation metrics - quantitative measures of an LLM's performance across a range of tasks e.g. verbosity.
 
 @@figure
@@ -82,7 +82,7 @@ This a relatively new evaluation technique, introduced in the LLM-as-a-Judge pap
 To counter these limitations, we can:
 
 - Use point-wise evaluation [^2].
-- Use various LLMs as judge or use an LLM fine-tuned for evaluation.
+- Use various LLMs as judges or use an LLM that has been fine-tuned for evaluation.
 - Include a verbosity/concision metric to penalise overly verbose answers.
 
 Note that the length of the output, typically determines the main cost of the LLM call and it is also linearly correlated to the LLM's latency [^3]. Hence, verbosity is actually one the most important metrics to evaluate.
