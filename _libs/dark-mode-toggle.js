@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             localStorage.setItem('darkMode', 'disabled');
             moonSvg.style.display = 'none';
             sunSvg.style.display = 'block';
+            console.log("Light");
         }
     });
 });
