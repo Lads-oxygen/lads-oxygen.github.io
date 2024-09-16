@@ -19,9 +19,9 @@
   --accent-color: #ece9e9;
   --background-color: #fbfefb;
   --hover-background-color: #f0f0f0;
-  --table-header-background: #dce2dc;
-  --table-even-row-background: #ecf3ecb9;
-  --table-odd-row-background: #f6f8f6b6;
+  --table-header-background: #e1dce2;
+  --table-even-row-background: #f1f3f4b9;
+  --table-odd-row-background: #f8f6f8b6;
   --table-border-color: #ddd;
   --table-caption-color: #666;
 }
@@ -35,8 +35,8 @@
   --background-color: #1a1d24;
   --hover-background-color: #3a3a3a;
   --table-header-background: #5d5d72;
-  --table-even-row-background: #292b31;
-  --table-odd-row-background: #3a3a44;
+  --table-even-row-background: #21232a;
+  --table-odd-row-background: #2a2a31;
   --table-border-color: #555;
   --table-caption-color: #999;
 }
