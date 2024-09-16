@@ -23,38 +23,3 @@
         </svg>
     </label>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const darkModeCheckbox = document.getElementById('dark-mode-checkbox');
-        const darkModeClass = 'dark-mode';
-        const moonSvg = document.getElementById('moon-svg');
-        const sunSvg = document.getElementById('sun-svg');
-
-        // Check localStorage for dark mode preference
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            document.documentElement.classList.add(darkModeClass);
-            darkModeCheckbox.checked = true;
-            sunSvg.style.display = 'inline'; // Show sun icon
-            moonSvg.style.display = 'none'; // Hide moon icon
-        } else {
-            sunSvg.style.display = 'none'; // Hide sun icon
-            moonSvg.style.display = 'inline'; // Show moon icon
-        }
-
-        // Toggle dark mode on checkbox change
-        darkModeCheckbox.addEventListener('change', function () {
-            if (this.checked) {
-                document.documentElement.classList.add(darkModeClass);
-                localStorage.setItem('darkMode', 'enabled');
-                sunSvg.style.display = 'inline'; // Show sun icon
-                moonSvg.style.display = 'none'; // Hide moon icon
-            } else {
-                document.documentElement.classList.remove(darkModeClass);
-                localStorage.setItem('darkMode', 'disabled');
-                sunSvg.style.display = 'none'; // Hide sun icon
-                moonSvg.style.display = 'inline'; // Show moon icon
-            }
-        });
-    });
-</script>
