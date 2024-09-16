@@ -1,3 +1,4 @@
+// Apply dark mode class immediately if preference is set
 if (localStorage.getItem('darkMode') === 'enabled') {
     document.documentElement.classList.add('dark-mode');
 }
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             localStorage.setItem('darkMode', 'enabled');
             moonSvg.style.display = 'block';
             sunSvg.style.display = 'none';
+            console.log("Dark");
         } else {
             document.documentElement.classList.remove(darkModeClass);
             localStorage.setItem('darkMode', 'disabled');
