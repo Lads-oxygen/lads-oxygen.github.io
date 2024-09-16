@@ -2,21 +2,16 @@
 @def maxtoclevel=2
 @def mintoclevel=2
 
-@@navbar
-@@navbar-left
-Ladislas Walewski
-@@
-
-@@navbar-right
-[About](/) [Blog](/blog/blog) [Resources](/resources/resources)
-@@
-@@
+{{insert navbar.html}}
 
 @@toc-container
 @@toc
 \tableofcontents
 @@
 @@
+
+
+@@div
 
 # A Comparison of Large Language Model (LLM) Evaluation Services
 
@@ -37,9 +32,9 @@ In practice, we make use of:
 - unit test cases - individual tests that examine how well a language model handles specific tasks e.g. assessing whether an LLM can generate a correct answer to a specific factual question.
 - evaluation metrics - quantitative measures of an LLM's performance across a range of tasks e.g. verbosity.
 
-
+@@figure
 \fig{./eval_metric.svg}
-
+@@
 
 Next we consider the different types of scorers that we can use.
 
@@ -92,7 +87,10 @@ To counter these limitations, we can:
 
 Note that the length of the output, typically determines the main cost of the LLM call and it is also linearly correlated to the LLM's latency [^3]. Hence, verbosity is actually one the most important metrics to evaluate.
 
+
+@@figure
 \fig{./point-wise_vs_pair-wise.svg}
+@@
 
 ## Human vs Computational vs LLM-Based Evaluation
 
@@ -104,29 +102,33 @@ Moreover, LLM-human agreement can achieve or even surpass the human-human agreem
 
 ## Comparison of Evaluation Services
 
-We will consider the evaluation services provided by Amazon and Google's AI platforms, Amazon Bedrock and Vertex AI respectively, as well as an open source alternative, Confident AI. The things we look for in an evaluation service are:
+We will consider the evaluation services provided by Amazon and Google's AI platforms, Amazon Bedrock and Vertex AI respectively, as well as an open source alternative, Deepeval, provided by Confident AI. The things we look for in an evaluation service are:
 
 - Support for LLM-based metrics.
 - The ability to define custom LLM-based metrics.
 
 @@my-table
-| Evaluation Service              | Confident AI                                                                                                | Vertex AI                                                                                                                                                                           | Bedrock                                                            |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| Evaluation methods              | ~~~<ul><li>LLM-based metrics </li><li>Computational metrics </li><li>Human feedback </li></ul>~~~                 | ~~~<ul><li>LLM-based metrics </li><li>Computational metrics </li></ul>~~~                                                                                                                 | ~~~<ul><li>Computational metrics </li><li>Human evaluation </li></ul>~~~ |
-| The LLM used as a judge         | ~~~<ul><li>Use any model accessible through an API </li><li>Not fine-tuned for evaluation </li><ul>~~~            | Custom model used for evaluation, most likely based on gemini (for example) and fine-tuned for evaluation                                                                           | N/A                                                                |
-| Custom LLM-based metric support | Yes:~~~<ul><li>Includes RAG testing </li><li>Includes knowledge retention (conversation)</li></ul>~~~             | Yes:~~~<ul><li>Includes RAG testing </li></ul>~~~                                                                                                                                         | No                                                                 |
-| Custom LLM support              | Yes:~~~<ul><li> Use a custom LLM to generate outputs in real-time, or supply pre-generated outputs.</li></ul>~~~ | Yes:~~~<ul><li>Pre-generate outputs.</li></ul>~~~                                                                                                                                        | No: ~~~<ul><li>Can only evaluate LLMs available on bedrock.</li></ul>~~~ |
-| Source availability             | Open source, except for visualisation dashboard                                                             | Closed source                                                                                                                                                                       | Closed source                                                      |
-| Other caveats/advantages        | ~~~<ul><li>Most metrics are backed by research~~~ [^4] ~~~</li></ul>~~~                                | ~~~<ul><li>Non-english inputs have worse evaluation quality </li><li>Pointwise or pairwise evaluation </li><li>Most metrics require context parameter (unlike Confident AI) </li></ul>~~~ |                                                                    |
+| Evaluation Service              | Deepeval                                                                                               | Vertex AI                                                                                                                                                                             | Bedrock                                                                  |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Evaluation methods              | ~~~<ul><li>LLM-based metrics </li><li>Computational metrics </li><li>Human feedback </li></ul>~~~      | ~~~<ul><li>LLM-based metrics </li><li>Computational metrics </li></ul>~~~                                                                                                             | ~~~<ul><li>Computational metrics </li><li>Human evaluation </li></ul>~~~ |
+| The LLM used as a judge         | ~~~<ul><li>Use any model accessible through an API </li><li>Not fine-tuned for evaluation </li><ul>~~~ | Custom model used for evaluation, most likely based on gemini (for example) and fine-tuned for evaluation                                                                             | N/A                                                                      |
+| Custom LLM-based metric support | Yes:~~~<ul><li>Includes RAG metrics </li><li>Includes conversational metrics</li></ul>~~~              | Yes:~~~<ul><li>Includes RAG metrics</li><li>Includes conversational metrics (new)</li></ul>~~~                                                                                        | No                                                                       |
+| Custom LLM support              | Yes:~~~<ul><li>online evaluations</li><li>Offline evaluations</li></ul>~~~                             | Yes:~~~<ul><li>Offline evaluations</li></ul>~~~                                                                                                                                       | No: ~~~<ul><li>Can only evaluate LLMs available on Bedrock</li></ul>~~~  |
+| Source availability             | Open source, except for visualisation dashboard (Confident AI)                                         | Closed source                                                                                                                                                                         | Closed source                                                            |
+| Other caveats/advantages        | ~~~<ul><li>Most metrics are backed by research~~~ [^4] ~~~</li></ul>~~~                                | ~~~<ul><li>Non-english inputs have worse evaluation quality </li><li>Pointwise or pairwise evaluation </li><li>Most metrics require context parameter (unlike Deepeval) </li></ul>~~~ |                                                                          |
 @@
 
-Based on our previous discussion, we can see that Amazon Bedrock's evaluation service is the most primitive, as it lacks both LLM-based metrics as well the ability to evaluate LLMs that are not available on the platform. Vertex AI is more advanced, offering both of these features as well as supporting custom LLM-based metrics. Unfortunately, Google's implementation has higher friction when compared with Confident AI. More specifically, to evaluate custom LLMs on Vertex AI, you must pre-generate outputs and pass this dataset to the evaluation service, and, defining custom LLM-based metrics is more involved than Confident AI's solution, G-Eval [^4]. Confident AI's evaluation service, DeepEval, also has the advantage of being open source and having an active community that contributes to the project, ensuring it has all the latest features.
+Based on our previous discussion, we can see that Amazon Bedrock's evaluation service is the most primitive, as it lacks both LLM-based metrics as well the ability to evaluate LLMs that are not available on the platform. Vertex AI is more advanced, offering both of these features as well as supporting custom LLM-based metrics. Unfortunately, Google's implementation has higher friction when compared with Deepeval. More specifically, to define custom metrics in Vertex AI one has to provide the raw prompt, whereas in Deepeval one only needs to pass the metric's criteria to G-Eval [^4].
 
-Another important difference between Vertex AI and Confident AI, is that Vertex AI uses a fine-tuned model for evaluation (likely based on Gemini), while Confident AI uses any (generalist) model accessible through an API. In testing, both of these services are comparably accurate and consistent, however with Confident AI one has to be wary of using the same LLM for both generation and evaluation, as this can lead to the aforementioned self-enhancement bias.
+In addition, Vertex AI only supports online evaluations for LLMs available on the Vertex AI platform, whereas Deepeval supports online evaluations for any LLM accessible through an API. Online evaluation refers to the process of evaluating models in real-time as they generate outputs, providing immediate feedback. This is particularly useful in applications requiring instant model adjustments, such as chatbots. In contrast, offline evaluation uses a historical dataset to assess model performance retrospectively, offering insights for batch processing or benchmarking.
+
+Another important difference between Vertex AI and Deepeval, is that Vertex AI uses a fine-tuned model for evaluation (likely based on Gemini), while Deepeval uses any (generalist) model accessible through an API. In testing, both of these services are comparably accurate and consistent, however with Deepeval one has to be wary of using the same LLM for both generation and evaluation, as this can lead to the aforementioned self-enhancement bias.
+
+DeepEval, also has the advantage of being open source and having an active community that contributes to the project, ensuring it has all the latest features.
 
 ## Conclusion
 
-In this article we've reviewed LLM evaluation and compared the key differences between a couple evaluation services. We've seen that LLM-based metrics are more suitable for live applications, and that Confident AI's evaluation service, DeepEval, has the most features and is the easiest to use. However, it is important to note that these softwares are quite new and constantly evolving, with Vertex AI's evaluation service still being in preview. By the time you read this article, the landscape may have changed.
+In this article we've reviewed LLM evaluation and compared the key differences between a couple evaluation services. We've seen that LLM-based metrics are more suitable for live applications, and that DeepEval, has the most features and is the easiest to use. However, it is important to note that these products are quite new and constantly evolving, with Vertex AI's evaluation service still being in preview. By the time you read this article, the landscape may have changed.
 
 ## Code Generation (Further Reading)
 
@@ -134,6 +136,7 @@ Code generation is one of the most useful applications of LLMs. So naturally, ev
 
 ## References
 
+@@references
 [^1]: [LLM-as-a-Judge](https://example.com/llm-as-a-judge)
 
 [^2]: [Latency](https://www.taivo.ai/__llm-latency-is-linear-in-output-token-count/)
@@ -141,11 +144,14 @@ Code generation is one of the most useful applications of LLMs. So naturally, ev
 [^3]: [Point-wise vs Pair-wise](https://arxiv.org/pdf/2406.12319)
 
 [^4]: [G-Eval](https://arxiv.org/abs/2303.16634)
+@@
 
-@@uncited-reference
+@@uncited-references
 [Confident AI Blog](https://www.confident-ai.com/blog/why-llm-as-a-judge-is-the-best-llm-evaluation-method)
 
 [Vertex AI Evaluation](https://cloud.google.com/vertex-ai/docs/evaluation/introduction)
 
 [Bedrock Metrics](https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-tasks.html)
+@@
+
 @@

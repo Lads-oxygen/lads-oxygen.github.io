@@ -1,17 +1,7 @@
 @def title = "Resources"
 @def hasmath = true
 
-@@navbar
-
-@@navbar-left
-Ladislas Walewski
-@@
-
-@@navbar-right
-[About](/) [Blog](/blog/blog) [Resources](/resources/resources)
-@@
-
-@@
+{{insert navbar.html}}
 
 ## Lecture notes
 

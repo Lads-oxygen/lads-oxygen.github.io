@@ -1,16 +1,6 @@
 @def title = "Blog"
 
-@@navbar
-
-@@navbar-left
-Ladislas Walewski
-@@
-
-@@navbar-right
-[About](/) [Blog](/blog/blog) [Resources](/resources/resources)
-@@
-
-@@
+{{insert navbar.html}}
 
 ## Posts
 

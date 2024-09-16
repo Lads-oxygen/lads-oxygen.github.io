@@ -2,12 +2,43 @@
     VARIABLES
 ================================================================== */
 
+/* ==================================================================
+    VARIABLES
+================================================================== */
+
+/* ==================================================================
+    VARIABLES
+================================================================== */
+
 :root {
-  --block-background: hsl(0, 0%, 94%);
-  --output-background: hsl(0, 0%, 98%);
+  --output-background: #ffffff;
   --small: 14px;
   --normal: 19px;
-  --text-color: hsv(0, 0%, 20%);
+  --text-color: #202020;
+  --link-color: #006cac;
+  --accent-color: #ece9e9;
+  --background-color: #fbfefb;
+  --hover-background-color: #f0f0f0;
+  --table-header-background: #dce2dc;
+  --table-even-row-background: #ecf3ecb9;
+  --table-odd-row-background: #f6f8f6b6;
+  --table-border-color: #ddd;
+  --table-caption-color: #666;
+}
+
+.dark-mode {
+  --output-background: #2c2c2c;
+  --container-color: #1f1f1f;
+  --text-color: #e6e6e6;
+  --link-color: #1bd9d8;
+  --accent-color: #3b4655;
+  --background-color: #1a1d24;
+  --hover-background-color: #3a3a3a;
+  --table-header-background: #5d5d72;
+  --table-even-row-background: #292b31;
+  --table-odd-row-background: #3a3a44;
+  --table-border-color: #555;
+  --table-caption-color: #999;
 }
 
 /* ==================================================================
@@ -15,8 +46,13 @@
 ================================================================== */
 
 html {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', 'Avenir', 'Open Sans', 'Lato', Helvetica, Arial, sans-serif;
   font-size: var(--normal);
+  color: var(--text-color);
+}
+
+body {
+  background-color: var(--background-color);
   color: var(--text-color);
 }
 
@@ -65,7 +101,7 @@ html {
   color: #a6a2a0;
   text-align: center;
   margin-top: 6em;
-  border-top: 1px solid lightgrey;
+  border-top: 1px solid var(--accent-color);
   padding-top: 2em;
   margin-bottom: 4em;
 }
@@ -74,32 +110,27 @@ html {
     TEXT GEOMETRY
 ================================================================== */
 
+.franklin-toc ol {
+  padding-inline: 0;
+}
+
 .franklin-toc li {
-  /* Avoid clickable elements being too close together. */
   margin: 0.6rem 0;
 }
 
 .franklin-content {
   position: relative;
-  padding-left: 12.5%;
-  padding-right: 12.5%;
   line-height: 1.35em;
+  padding: 0 20px;
 }
 
 /* On wide screens, fix content width to a max value. */
-@media (min-width: 940px) {
+@media (min-width: 480px) {
   .franklin-content {
-    width: 705px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-/* On narrow device, reduce margins. */
-@media (max-width: 480px) {
-  .franklin-content {
-    padding-left: 6%;
-    padding-right: 6%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 50px;
+    padding: 0 50px;
   }
 }
 
@@ -109,14 +140,27 @@ html {
 
 .franklin-content h1 {
   font-size: 24px;
+  padding-top: 2.5em;
+  padding-bottom: 0.5em;
+  border-top: 1px solid var(--accent-color);
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  color: var(--text-color);
 }
 
 .franklin-content h2 {
   font-size: 22px;
+  padding-top: 2em;
+  padding-bottom: 0.3em;
+  border-top: 1px solid var(--accent-color);
+  margin-top: 2em;
+  margin-bottom: 1em;
+  color: var(--text-color);
 }
 
 .franklin-content h3 {
   font-size: 20px;
+  color: var(--text-color);
 }
 
 .franklin-content h1,
@@ -128,85 +172,30 @@ h6 {
   text-align: left;
 }
 
-.franklin-content h1 {
-  padding-bottom: 0.5em;
-  border-bottom: 3px double lightgrey;
-  margin-top: 1.5em;
-  margin-bottom: 1em;
-}
-
-.franklin-content h2 {
-  padding-bottom: 0.3em;
-  border-bottom: 1px solid lightgrey;
-  margin-top: 2em;
-  margin-bottom: 1em;
-}
-
-.franklin-content h1 a {
-  color: inherit;
-}
-
-.franklin-content h1 a:hover {
-  text-decoration: none;
-}
-
-.franklin-content h2 a {
-  color: inherit;
-}
-
-.franklin-content h2 a:hover {
-  text-decoration: none;
-}
-
-.franklin-content h3 a {
-  color: inherit;
-}
-
-.franklin-content h3 a:hover {
-  text-decoration: none;
-}
-
-.franklin-content h4 a {
-  color: inherit;
-}
-
-.franklin-content h4 a:hover {
-  text-decoration: none;
-}
-
-.franklin-content h5 a {
-  color: inherit;
-}
-
-.franklin-content h5 a:hover {
-  text-decoration: none;
-}
-
+.franklin-content h1 a,
+.franklin-content h2 a,
+.franklin-content h3 a,
+.franklin-content h4 a,
+.franklin-content h5 a,
 .franklin-content h6 a {
   color: inherit;
 }
 
+.franklin-content h1 a:hover,
+.franklin-content h2 a:hover,
+.franklin-content h3 a:hover,
+.franklin-content h4 a:hover,
+.franklin-content h5 a:hover,
 .franklin-content h6 a:hover {
   text-decoration: none;
 }
 
-.franklin-content table {
-  margin-left: auto;
-  margin-right: auto;
-  border-collapse: collapse;
-  text-align: center;
-}
-
-.franklin-content th,
-td {
-  font-size: var(--small);
-  padding: 10px;
-  border: 1px solid black;
-}
+/* ==================================================================
+    BLOCKQUOTE STYLING
+================================================================== */
 
 .franklin-content blockquote {
-  background: var(--block-background);
-  border-left: 7px solid #a8a8a8;
+  border-left: 7px solid var(--accent-color);
   margin: 1.5em 10px;
   padding: 0.5em 10px;
   font-style: italic;
@@ -220,13 +209,17 @@ td {
     GENERAL FORMATTING
 ================================================================== */
 
-/* Spacing between bullet points. */
 .franklin-content li p {
   margin: 10px 0;
 }
 
+.franklin-content ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
 .franklin-content a {
-  color: #004de6;
+  color: var(--link-color);
   text-decoration: none;
 }
 
@@ -238,10 +231,7 @@ td {
     HYPERREFS AND FOOTNOTES
 ================================================================== */
 
-.franklin-content .eqref a {
-  color: green;
-}
-
+.franklin-content .eqref a,
 .franklin-content .bibref a {
   color: green;
 }
@@ -264,10 +254,6 @@ td {
   text-align: left;
 }
 
-/* .franklin-content .fndef tr {
-  border-left: 2px solid lightgray;
-} */
-
 .franklin-content .fndef td.fndef-backref {
   vertical-align: top;
   font-size: 70%;
@@ -281,7 +267,7 @@ td {
 }
 
 /* ==================================================================
-    IMAGES in CONTENT
+    IMAGES IN CONTENT
 ================================================================== */
 
 .franklin-content img {
@@ -309,10 +295,7 @@ body {
 }
 
 .katex-display .katex {
-  /* Overwrite KaTeX settings. */
   display: inline-block;
-
-  /* Allow display equations to wrap on small screens. */
   white-space: normal;
 }
 
@@ -334,21 +317,10 @@ body {
 ================================================================== */
 
 code {
-  background-color: var(--block-background);
   padding: 0.1em 0.2em;
   border-radius: 2px;
   font-size: var(--small);
 }
-
-/* .franklin-content code { */
-
-/* background-color: rgba(27,31,35,0.05); */
-
-/* padding: 0.1em 0.2em; */
-
-/* border-radius: 2px; */
-
-/* font-size: 90%; } */
 
 .hljs {
   font-size: var(--small);
@@ -379,13 +351,228 @@ code {
 
 .franklin-content .colbox-blue {
   background-color: #eef3f5;
-  padding-top: 5px;
-  padding-right: 10px;
-  padding-left: 10px;
-  padding-bottom: 5px;
-  margin-left: 5px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  padding: 5px 10px;
+  margin: 5px;
   border-radius: 0 10px 10px 0;
   border-left: 5px solid #4c9cf1;
+}
+
+/* ==================================================================
+    DARK MODE
+================================================================== */
+
+.dark-mode-toggle {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 14px 0 14px 16px;
+  color: var(--text-color);
+  margin-left: auto;
+}
+
+.dark-mode-toggle input {
+  display: none;
+}
+
+.dark-mode-toggle svg {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  fill: var(--text-color);
+}
+
+/* ==================================================================
+    NAVBAR
+================================================================== */
+
+.navbar-left {
+  grid-row: 1;
+  grid-column: 1;
+  width: max-content;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px 0;
+  z-index: 1000;
+}
+
+.navbar-right {
+  grid-row: 1;
+  grid-column: 2;
+  width: fit-content;
+  margin-left: auto;
+  font-size: 18px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right a {
+  display: block;
+  color: var(--text-color);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.navbar-right a:hover {
+  background-color: var(--hover-background-color);
+  text-decoration: none;
+}
+
+/* Media query for screens wider than 940px */
+@media (min-width: 940px) {
+  .franklin-content>*:not(.navbar):not(.navbar-left):not(.toc-container) {
+    grid-column: 2;
+  }
+}
+
+/* Media query for screens narrower than 940px */
+@media (max-width: 940px) {
+  .toc-container {
+    display: none;
+  }
+
+  .franklin-content>*:not(.navbar-left):not(.navbar-right) {
+    grid-column: span 2;
+  }
+}
+
+/* ==================================================================
+    GENERAL TABLE STYLING
+================================================================== */
+
+table {
+  width: 100%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  text-align: left;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th {
+  background-color: var(--table-header-background);
+  padding: 12px 15px;
+  border-bottom: 2px solid var(--table-border-color);
+  text-transform: uppercase;
+  text-align: left;
+  font-weight: 600;
+}
+
+td {
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--table-border-color);
+  vertical-align: middle;
+}
+
+tr:nth-child(even) {
+  background-color: var(--table-odd-row-background);
+}
+
+tr:nth-child(odd) {
+  background-color: var(--table-even-row-background);
+}
+
+caption {
+  caption-side: bottom;
+  padding: 10px;
+  font-style: italic;
+  color: var(--table-caption-color);
+}
+
+/* ==================================================================
+    REFERENCES
+================================================================== */
+
+.references table {
+  border: none;
+}
+
+.references td {
+  border: none;
+  padding: 0;
+  background-color: var(--background-color);
+}
+
+/* ==================================================================
+    UNCITED REFERENCES
+================================================================== */
+
+.uncited-references {
+  font-size: smaller;
+  margin-left: 1em;
+  color: inherit;
+  text-indent: -1em;
+  vertical-align: top;
+  padding-left: 29.5px;
+}
+
+.uncited-references a:hover {
+  text-decoration: underline;
+}
+
+.uncited-references p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* ==================================================================
+    TOC CONTAINER
+================================================================== */
+
+/* Change text colour */
+
+.toc-container {
+  grid-column: 1;
+  position: relative;
+  width: 200px;
+  height: 100%;
+  margin-top: 1em;
+  overflow-y: auto;
+}
+
+.toc {
+  padding: 0;
+  margin: 0;
+}
+
+.toc li {
+  list-style-type: none;
+}
+
+.toc a {
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: none;
+}
+
+/* ==================================================================
+    DATE STYLING
+================================================================== */
+
+.date {
+  font-size: 0.8em;
+  color: #666;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
+/* ==================================================================
+    FIGURE STYLING
+================================================================== */
+
+.figure {
+  margin: 50px 0;
+  text-align: center;
+}
+
+.figure img {
+  padding-left: 0;
+  max-width: 800px;
+  min-width: 300px;
+  max-height: 400px;
 }
