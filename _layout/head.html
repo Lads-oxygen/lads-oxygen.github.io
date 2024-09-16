@@ -9,45 +9,6 @@
   <link rel="stylesheet" href="/css/franklin.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   {{isdef title}} <title>{{fill title}}</title> {{end}}
-  <script>
-    if (localStorage.getItem('darkMode') === 'enabled') {
-      document.documentElement.classList.add('dark-mode');
-    }
-  </script>
-  <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-      const darkModeCheckbox = document.getElementById('dark-mode-checkbox');
-      const darkModeClass = 'dark-mode';
-      const moonSvg = document.getElementById('moon-svg');
-      const sunSvg = document.getElementById('sun-svg');
-
-      // Check localStorage for dark mode preference
-      if (localStorage.getItem('darkMode') === 'enabled') {
-        document.documentElement.classList.add(darkModeClass);
-        darkModeCheckbox.checked = true;
-        sunSvg.style.display = 'inline'; // Show sun icon
-        moonSvg.style.display = 'none'; // Hide moon icon
-      } else {
-        sunSvg.style.display = 'none'; // Hide sun icon
-        moonSvg.style.display = 'inline'; // Show moon icon
-      }
-
-      // Toggle dark mode on checkbox change
-      darkModeCheckbox.addEventListener('change', function () {
-        if (this.checked) {
-          document.documentElement.classList.add(darkModeClass);
-          localStorage.setItem('darkMode', 'enabled');
-          sunSvg.style.display = 'inline'; // Show sun icon
-          moonSvg.style.display = 'none'; // Hide moon icon
-        } else {
-          document.documentElement.classList.remove(darkModeClass);
-          localStorage.setItem('darkMode', 'disabled');
-          sunSvg.style.display = 'none'; // Hide sun icon
-          moonSvg.style.display = 'inline'; // Show moon icon
-        }
-      });
-    });
-  </script>
 </head>
 
 <body>
