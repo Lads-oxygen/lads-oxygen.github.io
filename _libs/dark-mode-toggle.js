@@ -23,13 +23,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
             localStorage.setItem('darkMode', 'enabled');
             moonSvg.style.display = 'block';
             sunSvg.style.display = 'none';
-            console.log("Dark");
         } else {
             document.documentElement.classList.remove(darkModeClass);
             localStorage.setItem('darkMode', 'disabled');
             moonSvg.style.display = 'none';
             sunSvg.style.display = 'block';
-            console.log("Light");
         }
     });
 });
