@@ -290,21 +290,34 @@ body {
   counter-reset: eqnum;
 }
 
+.equation-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  justify-content: center;
+}
+
 .katex {
   font-size: 1em !important;
 }
 
+.katex-display {
+  display: inline-block;
+  white-space: nowrap;
+  position: relative;
+  flex-grow: 200;
+}
+
 .katex-display .katex {
   display: inline-block;
-  white-space: normal;
+  white-space: nowrap;
 }
 
 .katex-display::after {
   counter-increment: eqnum;
   content: "(" counter(eqnum) ")";
   position: relative;
-  float: right;
-  padding-right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .nonumber .katex-display::after {
@@ -442,6 +455,11 @@ code {
 /* ==================================================================
     GENERAL TABLE STYLING
 ================================================================== */
+
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 
 table {
   width: 100%;

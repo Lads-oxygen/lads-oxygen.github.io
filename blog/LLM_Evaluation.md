@@ -54,10 +54,14 @@ Computation-based metrics are quantitative measures for evaluating LLMs by compa
 
 Computation-based metrics only capture surface level differences, as they cannot capture subtleties such as tone and style. Moreover, they may penalise small wording differences that convey the same meaning. To see this, let's consider the precision metric defined as:
 
+@@equation-wrapper
+@@nonumber
 $$
 \text{Precision} = \frac{\text{Number of common words between output and reference
 }}{\text{Total number of words in output}}
 $$
+@@
+@@
 
 against the following two sentences (where reference is the ideal/expected output):
 
@@ -107,16 +111,7 @@ We will consider the evaluation services provided by Amazon and Google's AI plat
 - Support for LLM-based metrics.
 - The ability to define custom LLM-based metrics.
 
-@@my-table
-| Evaluation Service              | Deepeval                                                                                               | Vertex AI                                                                                                                                                                             | Bedrock                                                                  |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| Evaluation methods              | ~~~<ul><li>LLM-based metrics </li><li>Computational metrics </li><li>Human feedback </li></ul>~~~      | ~~~<ul><li>LLM-based metrics </li><li>Computational metrics </li></ul>~~~                                                                                                             | ~~~<ul><li>Computational metrics </li><li>Human evaluation </li></ul>~~~ |
-| The LLM used as a judge         | ~~~<ul><li>Use any model accessible through an API </li><li>Not fine-tuned for evaluation </li><ul>~~~ | Custom model used for evaluation, most likely based on gemini (for example) and fine-tuned for evaluation                                                                             | N/A                                                                      |
-| Custom LLM-based metric support | Yes:~~~<ul><li>Includes RAG metrics </li><li>Includes conversational metrics</li></ul>~~~              | Yes:~~~<ul><li>Includes RAG metrics</li><li>Includes conversational metrics (new)</li></ul>~~~                                                                                        | No                                                                       |
-| Custom LLM support              | Yes:~~~<ul><li>online evaluations</li><li>Offline evaluations</li></ul>~~~                             | Yes:~~~<ul><li>Offline evaluations</li></ul>~~~                                                                                                                                       | No: ~~~<ul><li>Can only evaluate LLMs available on Bedrock</li></ul>~~~  |
-| Source availability             | Open source, except for visualisation dashboard (Confident AI)                                         | Closed source                                                                                                                                                                         | Closed source                                                            |
-| Other caveats/advantages        | ~~~<ul><li>Most metrics are backed by research~~~ [^4] ~~~</li></ul>~~~                                | ~~~<ul><li>Non-english inputs have worse evaluation quality </li><li>Pointwise or pairwise evaluation </li><li>Most metrics require context parameter (unlike Deepeval) </li></ul>~~~ |                                                                          |
-@@
+{{insert ../_assets/blog/LLM_Evaluation/comparison-table.html}}
 
 Based on our previous discussion, we can see that Amazon Bedrock's evaluation service is the most primitive, as it lacks both LLM-based metrics as well the ability to evaluate LLMs that are not available on the platform. Vertex AI is more advanced, offering both of these features as well as supporting custom LLM-based metrics. Unfortunately, Google's implementation has higher friction when compared with Deepeval. More specifically, to define custom metrics in Vertex AI one has to provide the raw prompt, whereas in Deepeval one only needs to pass the metric's criteria to G-Eval [^4].
 

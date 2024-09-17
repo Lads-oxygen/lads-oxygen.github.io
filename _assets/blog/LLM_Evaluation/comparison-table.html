@@ -1,0 +1,105 @@
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Evaluation Service</th>
+                <th>Deepeval</th>
+                <th>Vertex AI</th>
+                <th>Bedrock</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Evaluation methods</td>
+                <td>
+                    <ul>
+                        <li>LLM-based metrics</li>
+                        <li>Computational metrics</li>
+                        <li>Human feedback</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>LLM-based metrics</li>
+                        <li>Computational metrics</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Computational metrics</li>
+                        <li>Human evaluation</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>The LLM used as a judge</td>
+                <td>
+                    <ul>
+                        <li>Use any model accessible through an API</li>
+                        <li>Not fine-tuned for evaluation</li>
+                    </ul>
+                </td>
+                <td>Custom model used for evaluation, most likely based on gemini (for example) and fine-tuned for
+                    evaluation</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Custom LLM-based metric support</td>
+                <td>
+                    <ul>
+                        <li>Includes RAG metrics</li>
+                        <li>Includes conversational metrics</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Includes RAG metrics</li>
+                        <li>Includes conversational metrics (new)</li>
+                    </ul>
+                </td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Custom LLM support</td>
+                <td>
+                    <ul>
+                        <li>Online evaluations</li>
+                        <li>Offline evaluations</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Offline evaluations</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Can only evaluate LLMs available on Bedrock</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Source availability</td>
+                <td>Open source, except for visualisation dashboard (Confident AI)</td>
+                <td>Closed source</td>
+                <td>Closed source</td>
+            </tr>
+            <tr>
+                <td>Other caveats/advantages</td>
+                <td>
+                    <ul>
+                        <li>Most metrics are backed by research</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Non-english inputs have worse evaluation quality</li>
+                        <li>Pointwise or pairwise evaluation</li>
+                        <li>Most metrics require context parameter (unlike Deepeval)</li>
+                    </ul>
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
