@@ -1,4 +1,4 @@
-@def title = "LLM Evaluation"
+@def title = "LLM Evaluation Services"
 @def maxtoclevel=2
 @def mintoclevel=2
 
@@ -73,7 +73,7 @@ Despite the two sentences conveying the same meaning, the precision score would 
 
 ### LLM-Based Evaluation
 
-This a relatively new evaluation technique, introduced in the LLM-as-a-Judge paper [^1]. In this method, we use an LLM to evaluate the outputs of another LLM based on the same set of criteria as in human evaluation. The LLM judge used is typically a large generalist model or a smaller model fine-tuned for evaluation. The LLM judge can provide a score for each output, as well as a justification for the score.
+In this method, we use an LLM to evaluate the outputs of another LLM based on the same set of criteria as in human evaluation. Zheng et al. studied this approach on MT-Bench and Chatbot Arena [[1]](#llm-ref-1). The LLM judge used is typically a large generalist model or a smaller model fine-tuned for evaluation. The LLM judge can provide a score for each output, as well as a justification for the score.
 
 
 
@@ -85,11 +85,11 @@ This a relatively new evaluation technique, introduced in the LLM-as-a-Judge pap
 
 To counter these limitations, we can:
 
-- Use point-wise evaluation [^2].
+- Use point-wise evaluation [[2]](#llm-ref-2).
 - Use various LLMs as judges or use an LLM that has been fine-tuned for evaluation.
 - Include a verbosity/concision metric to penalise overly verbose answers.
 
-Note that the length of the output, typically determines the main cost of the LLM call and it is also linearly correlated to the LLM's latency [^3]. Hence, verbosity is actually one the most important metrics to evaluate.
+Note that the length of the output, typically determines the main cost of the LLM call and it is also linearly correlated to the LLM's latency [[3]](#llm-ref-3). Hence, verbosity is actually one the most important metrics to evaluate.
 
 
 @@figure
@@ -102,9 +102,11 @@ Human evaluation is the most accurate and nuanced evaluation method. However, it
 
 As previously discussed, computational metrics are not as accurate or nuanced and they require a reference answer. By contrast, most LLM-based metrics are **reference-free**, besides a handful such as correctness or contextual recall/precision. In practice, this makes LLM-based metrics more suitable for live applications, as they can be used on dynamic datasets (collection of test cases) without the need to provide reference answers, which can be time-consuming and costly to obtain.
 
-Moreover, LLM-human agreement can achieve or even surpass the human-human agreement of around 80% [^1], as for subjective tasks, LLMs can actually be more consistent than humans. The ability of LLM-based metrics to provide reasoning for their judgement is also a significant advantage. It seems like LLM-based metrics yield all the benefits of human evaluation, without the cost and time constraints.
+In Zheng et al.’s experiments, GPT-4 agreed with human preferences over 80% of the time, roughly matching human–human agreement [[1]](#llm-ref-1). The ability of LLM-based metrics to provide reasoning for their judgement is also a significant advantage. It seems like LLM-based metrics yield all the benefits of human evaluation, without the cost and time constraints.
 
 ## Comparison of Evaluation Services
+
+*This comparison reflects the services as they stood in September 2024.*
 
 We will consider the evaluation services provided by Amazon and Google's AI platforms, Amazon Bedrock and Vertex AI respectively, as well as an open source alternative, Deepeval, provided by Confident AI. The things we look for in an evaluation service are:
 
@@ -113,7 +115,7 @@ We will consider the evaluation services provided by Amazon and Google's AI plat
 
 {{insert ../_assets/blog/LLM_Evaluation/comparison-table.html}}
 
-Based on our previous discussion, we can see that Amazon Bedrock's evaluation service is the most primitive, as it lacks both LLM-based metrics as well the ability to evaluate LLMs that are not available on the platform. Vertex AI is more advanced, offering both of these features as well as supporting custom LLM-based metrics. Unfortunately, Google's implementation has higher friction when compared with Deepeval. More specifically, to define custom metrics in Vertex AI one has to provide the raw prompt, whereas in Deepeval one only needs to pass the metric's criteria to G-Eval [^4].
+Based on our previous discussion, we can see that Amazon Bedrock's evaluation service is the most primitive, as it lacks both LLM-based metrics as well the ability to evaluate LLMs that are not available on the platform. Vertex AI is more advanced, offering both of these features as well as supporting custom LLM-based metrics. Unfortunately, Google's implementation has higher friction when compared with Deepeval. More specifically, to define custom metrics in Vertex AI one has to provide the raw prompt, whereas in Deepeval one only needs to pass the metric's criteria to G-Eval [[4]](#llm-ref-4).
 
 In addition, Vertex AI only supports online evaluations for LLMs available on the Vertex AI platform, whereas Deepeval supports online evaluations for any LLM accessible through an API. Online evaluation refers to the process of evaluating models in real-time as they generate outputs, providing immediate feedback. This is particularly useful in applications requiring instant model adjustments, such as chatbots. In contrast, offline evaluation uses a historical dataset to assess model performance retrospectively, offering insights for batch processing or benchmarking.
 
@@ -127,26 +129,25 @@ In this article we've reviewed LLM evaluation and compared the key differences b
 
 ## Code Generation (Further Reading)
 
-Code generation is one of the most useful applications of LLMs. So naturally, evaluating the quality of generated code is of great interest. For the keen among you, I would recommend checking out this [paper](https://arxiv.org/abs/2107.03374), to see how we might evaluate functional correctness of generated code. Essentially we execute the generated code on a set of generated test cases in a sandbox environment, and check if the output matches the expected output. I would also recommend reading this [paper](https://github.com/microsoft/CodeT/tree/main/CodeT), which introduces a method for improving generated code. The idea is to generate multiple candidates and select the best one. In fact, this approach can also be used to improve the quality of generated text.
+Code generation is one of the most useful applications of LLMs. So naturally, evaluating the quality of generated code is of great interest. For the keen among you, I would recommend the HumanEval paper for an example of how to evaluate the functional correctness of generated code [[5]](#llm-ref-5). Essentially we execute the generated code on a set of generated test cases in a sandbox environment, and check if the output matches the expected output. I would also recommend reading the CodeT paper, which introduces a method for improving generated code [[6]](#llm-ref-6). The idea is to generate multiple candidates and select the best one. In fact, this approach can also be used to improve the quality of generated text.
 
 ## References
 
-@@references
-[^1]: [LLM-as-a-Judge](https://example.com/llm-as-a-judge)
+~~~
+<ol>
+  <li id="llm-ref-1">Zheng et al. <a href="https://arxiv.org/abs/2306.05685">Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena</a>. NeurIPS 2023.</li>
+  <li id="llm-ref-2">Jeong et al. <a href="https://arxiv.org/abs/2406.12319v1">PRePair: Pointwise Reasoning Enhance Pairwise Evaluating for Robust Instruction-Following Assessments</a>. 2024.</li>
+  <li id="llm-ref-3">Pungas. <a href="https://www.taivo.ai/__llm-latency-is-linear-in-output-token-count/">LLM latency is linear in output token count</a>. 2023.</li>
+  <li id="llm-ref-4">Liu et al. <a href="https://aclanthology.org/2023.emnlp-main.153/">G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment</a>. EMNLP 2023.</li>
+  <li id="llm-ref-5">Chen et al. <a href="https://arxiv.org/abs/2107.03374">Evaluating Large Language Models Trained on Code</a>. 2021.</li>
+  <li id="llm-ref-6">Chen et al. <a href="https://arxiv.org/abs/2207.10397">CodeT: Code Generation with Generated Tests</a>. ICLR 2023.</li>
+</ol>
+~~~
 
-[^2]: [Latency](https://www.taivo.ai/__llm-latency-is-linear-in-output-token-count/)
+Service links
 
-[^3]: [Point-wise vs Pair-wise](https://arxiv.org/pdf/2406.12319)
-
-[^4]: [G-Eval](https://arxiv.org/abs/2303.16634)
-@@
-
-@@uncited-references
-[Confident AI Blog](https://www.confident-ai.com/blog/why-llm-as-a-judge-is-the-best-llm-evaluation-method)
-
-[Vertex AI Evaluation](https://cloud.google.com/vertex-ai/docs/evaluation/introduction)
-
-[Bedrock Metrics](https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-tasks.html)
-@@
+- [Confident AI's guide to LLM-as-a-judge](https://www.confident-ai.com/blog/why-llm-as-a-judge-is-the-best-llm-evaluation-method)
+- [Google Cloud's model evaluation documentation](https://cloud.google.com/vertex-ai/docs/evaluation/introduction)
+- [Amazon Bedrock's model evaluation task types](https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-tasks.html)
 
 @@

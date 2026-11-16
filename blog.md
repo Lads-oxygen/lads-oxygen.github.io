@@ -1,7 +1,6 @@
 @def title = "Blog"
+@def landing_redirect = "/#posts"
 
 {{insert navbar.html}}
 
-## Posts
-
-[A Comparison of Large Language Model (LLM) Evaluation Services](../blog/LLM_Evaluation/)
+Find the [blog posts](/#posts) on the homepage.

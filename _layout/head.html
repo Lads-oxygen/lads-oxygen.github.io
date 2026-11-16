@@ -4,11 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400..700&amp;family=Spectral:ital,wght@0,400;0,600;1,400;1,600&amp;display=swap">
   {{if hasmath}} {{insert head_katex.html }} {{end}}
   {{if hascode}} {{insert head_highlight.html }} {{end}}
   <link rel="stylesheet" href="/css/franklin.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  {{isdef title}} <title>{{fill title}}</title> {{end}}
+  {{isdef flow_matching_demos}}
+  <link rel="stylesheet" href="/assets/blog/flow-matching/demos.css">
+  {{end}}
+  {{isdef landing_redirect}}
+  <meta http-equiv="refresh" content="0; url={{fill landing_redirect}}">
+  {{end}}
+  {{isdef title}}<title>{{fill title}}{{isnotdef is_homepage}} · Ladislas Walewski{{end}}</title>{{end}}
   <script src="/libs/dark-mode-toggle.js"></script>
 </head>
 
